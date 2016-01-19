@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "docker-host"
+  config.vm.provision "docker"
+  config.vm.network :forwarded_port, guest: 80, host: 4567
+  config.vm.synced_folder '../drupal/profiles/myprofile', '/srv/myprofile', type: 'rsync'
+end
